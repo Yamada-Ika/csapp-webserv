@@ -94,7 +94,7 @@ int open_listenfd(const char *port) {
   }
   freeaddrinfo(listp);
 
-  if (listen(listenfd, 0) < 0) {
+  if (listen(listenfd, 1024) < 0) {
     close(listenfd);
     return -1;
   }
