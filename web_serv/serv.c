@@ -30,7 +30,7 @@ bool parse_uri(char *uri, char *filename, char *query) {
     strcpy(filename, "."); // current directory
     strcat(filename, uri);
     if (uri[strlen(uri) - 1] == '/') {
-      strcat(filename, "index.html");
+      strcat(filename, "./testdata/html/index.html");
     }
     return true;
   } else { // dynamic content
@@ -77,6 +77,13 @@ void serve_static(const int fd, const char *filename, off_t filesize) {
   sprintf(buf, "%sServer: surume Web Server\r\n", buf);
   sprintf(buf, "%sContent-length: %lld\r\n", buf, filesize);
   sprintf(buf, "%sContent-type: %s\r\n\r\n", buf, filetype);
+
+  #if DEBUG
+  printf("[log] >>> HTTP response\n");
+  printf("%s", buf);
+  printf("[log] <<< HTTP response\n");
+  #endif
+
   send(fd, buf, strlen(buf), 0);
 
   // send response body to client

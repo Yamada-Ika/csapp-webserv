@@ -59,12 +59,8 @@ void check_clients(t_pool *p) {
         printf("%s", buf);
         // printf("%*.s", recvbyte, buf);
 
-        sprintf(buf, "HTTP/1.1 200 OK\r\n");
-        sprintf(buf, "Content-Length: 88\r\n");
-        sprintf(buf, "Content-Type: text/html\r\n");
-        sprintf(buf, "Connection: Closed\r\n\r\n");
-        sprintf(buf, "<html><body><h1>Hello, World!</h1></body></html>\r\n");
-        send(connfd, buf, strlen(buf), 0);
+        echo(connfd);
+
         // close(connfd);
         // FD_CLR(connfd, &p->read_set);
         // p->clientfd[i] = -1;
